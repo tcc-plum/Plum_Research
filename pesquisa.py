@@ -52,10 +52,12 @@ class Pesquisa:
                 if not os.path.exists(self.PASTA_FRAMES):
                     os.makedirs(self.PASTA_FRAMES)
                 
-                foto_nome = 'face_' + self.data('datetime') + '_' + self.CARTAZ_NOME + '_' + str(self.CARTAZ_ORDEM) + '_.jpg'
-                foto_arquivo = self.PASTA_FRAMES + '/' + foto_nome
+                # foto_nome = 'face_' + self.data('datetime') + '_' + self.CARTAZ_NOME + '_' + str(self.CARTAZ_ORDEM) + '_.jpg'
+                # foto_arquivo = self.PASTA_FRAMES + '/' + foto_nome
                 
                 if self.CARTAZ_ORDEM > 0:
+                    foto_nome = 'face_' + self.data('datetime') + '_' + self.CARTAZ_NOME + '_' + str(self.CARTAZ_ORDEM) + '_.jpg'
+                    foto_arquivo = self.PASTA_FRAMES + '/' + foto_nome
                     cv2.imwrite(foto_arquivo, sub_face)
             
             video_captura_nome = 'Plum - Video Streaming'
