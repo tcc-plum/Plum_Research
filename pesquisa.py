@@ -1,6 +1,7 @@
 import cv2
 import datetime
 import os
+import random
 
 class Pesquisa:
     
@@ -58,7 +59,18 @@ class Pesquisa:
                 if self.CARTAZ_ORDEM > 0:
                     foto_nome = 'face_' + self.data('datetime') + '_' + self.CARTAZ_NOME + '_' + str(self.CARTAZ_ORDEM) + '_.jpg'
                     foto_arquivo = self.PASTA_FRAMES + '/' + foto_nome
-                    cv2.imwrite(foto_arquivo, sub_face)
+                    # cv2.imwrite(foto_arquivo, sub_face)                    
+                    
+                    captura_imagem = [True, False]
+                    vlr_captura =  random.randint(0,1)
+                    captura = captura_imagem[vlr_captura]
+                    
+                    # verifica se tem mais de 15 imagens na pasta
+                    # escolhe aleatoriamente as imagens que serão salvas
+                    # esse processo foi feito para diminuir a quantidade de imagens repetidas
+                    
+                    if captura and len(os.listdir(self.PASTA_FRAMES)) < 15:
+                        cv2.imwrite(foto_arquivo, sub_face)
             
             video_captura_nome = 'Plum - Video Streaming'
             cv2.namedWindow(video_captura_nome)
@@ -70,7 +82,7 @@ class Pesquisa:
             tecla_esc = 27
             
             tecla = cv2.waitKeyEx(30)
-            if tecla == tecla_seta_direita and self.CARTAZ_ORDEM <= len(os.listdir(self.PASTA_CARTAZES)):
+            if tecla == tecla_seta_direita and self.CARTAZ_ORDEM < len(os.listdir(self.PASTA_CARTAZES)):
                 self.CARTAZ_ORDEM = self.CARTAZ_ORDEM + 1
                 self.showNextPoster()
             elif tecla == tecla_seta_esquerda and self.CARTAZ_ORDEM > 1:
